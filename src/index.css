@@ -7,3 +7,13 @@ body {
   background-color: rgb(68, 114, 221);
   color: white
 }
+
+.selected {
+  background-color: rgb(223, 147, 17);
+  color: white
+}
+
+.selected:hover {
+  background-color: rgb(223, 147, 17);
+  color: white
+}

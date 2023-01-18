@@ -23,10 +23,10 @@ export default function Month({ month, monthNumber, year }) {
 		};
 	}, []);
 
-	useEffect(
-		() => console.log("month recieved in month", monthNumber, month),
-		[month, monthNumber]
-	);
+	// useEffect(
+	// 	() => console.log("month recieved in month", monthNumber, month),
+	// 	[month, monthNumber]
+	// );
 
 	return (
 		<div className="month" ref={ref}>

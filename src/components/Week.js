@@ -1,12 +1,15 @@
+import { useCalendar } from "../context.js/useCalendar";
 import getMonthName from "../lib/getMonthName";
 import Day from "./Day";
 
 export default function Week({ week, weekNumber, divWidth }) {
+	const { selectDay, unselectDay } = useCalendar();
+
 	return (
 		<div className="week d-flex">
 			{["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"].map((dayName, i) => (
 				<Day
-					className="day"
+					className={week[i].isSelected ? "day selected" : "day"}
 					dayNumber={week[i].dayNumber}
 					divWidth={divWidth}
 					onClick={() => {
@@ -19,14 +22,14 @@ export default function Week({ week, weekNumber, divWidth }) {
 								day.dayNumber,
 								day
 							);
+							if (!day.isSelected) {
+								selectDay(day);
+							} else {
+								unselectDay(day);
+							}
 						} else {
 							console.log("There is no day here...");
 						}
-						// if (!isDaySelected(day)) {
-						// 	selectDay(day);
-						// } else {
-						// 	unselectDay(day);
-						// }
 					}}
 				/>
 			))}

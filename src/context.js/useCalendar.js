@@ -10,23 +10,60 @@ export function CalendarProvider({ children }) {
 
 	function selectDay(day) {
 		console.log("select day", day);
-		const updatedSelectedDays = [...selectedDays, day];
-		setSelectedDays(updatedSelectedDays);
+		// change day isSelected prop to true:
+		const updatedCalendar = calendar.map((month, m) => {
+			if (m === day.monthIndex) {
+				return month.map((week, w) => {
+					if (w === day.weekIndex) {
+						return week.map((DAY, d) => {
+							if (d === day.dayIndex) {
+								// this is the day wee need to update:
+								return {
+									...DAY,
+									isSelected: true,
+								};
+							} else {
+								return DAY;
+							}
+						});
+					} else {
+						return week;
+					}
+				});
+			} else {
+				return month;
+			}
+		});
+		setCalendar(updatedCalendar);
 	}
 
 	function unselectDay(day) {
 		console.log("unselect day...", day);
-		let updatedSelectedDays = [];
-		selectedDays.forEach((d) => {
-			if (
-				d.dayName !== day.dayName &&
-				d.dayNumber !== day.dayNumber &&
-				d.monthIndex !== day.monthIndex
-			) {
-				updatedSelectedDays.push(d);
+		// change day isSelected prop to false:
+		const updatedCalendar = calendar.map((month, m) => {
+			if (m === day.monthIndex) {
+				return month.map((week, w) => {
+					if (w === day.weekIndex) {
+						return week.map((DAY, d) => {
+							if (d === day.dayIndex) {
+								// this is the day wee need to update:
+								return {
+									...DAY,
+									isSelected: false,
+								};
+							} else {
+								return DAY;
+							}
+						});
+					} else {
+						return week;
+					}
+				});
+			} else {
+				return month;
 			}
 		});
-		setSelectedDays(updatedSelectedDays);
+		setCalendar(updatedCalendar);
 	}
 
 	useEffect(() => console.log("calendar:", calendar), [calendar]);
@@ -35,6 +72,8 @@ export function CalendarProvider({ children }) {
 	const value = {
 		calendar,
 		setCalendar,
+		selectDay,
+		unselectDay,
 	};
 
 	return (

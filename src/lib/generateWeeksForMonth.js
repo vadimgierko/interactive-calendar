@@ -41,5 +41,14 @@ export default function generateWeeksForMonth(monthIndex, year) {
 			updatedWeeks.push(week);
 		}
 	});
+	// add weekIndex & dayIndex:
+	for (let i = 0; i < updatedWeeks.length; i++) {
+		for (let d = 0; d < 7; d++) {
+			const dayObj = updatedWeeks[i][d];
+			updatedWeeks[i][d] = Object.keys(dayObj).length
+				? { ...updatedWeeks[i][d], weekIndex: i, dayIndex: d }
+				: {};
+		}
+	}
 	return updatedWeeks;
 }
