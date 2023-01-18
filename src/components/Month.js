@@ -1,11 +1,8 @@
 import { useEffect, useState, useRef, useLayoutEffect } from "react";
-import generateWeeksForMonth from "../lib/generateWeeksForMonth";
 import getMonthName from "../lib/getMonthName";
 import Week from "./Week";
 
-export default function Month({ monthNumber, year }) {
-	const [weeks, setWeeks] = useState([]);
-
+export default function Month({ month, monthNumber, year }) {
 	//====== GET MONTH DIV WIDTH TO DIVIDE IT TO 7 DAYS ====
 	const ref = useRef(null);
 	const [monthDivWidth, setMonthDivWidth] = useState(0);
@@ -26,17 +23,10 @@ export default function Month({ monthNumber, year }) {
 		};
 	}, []);
 
-	// useEffect(
-	// 	() => console.log("month div width:", monthDivWidth),
-	// 	[monthDivWidth]
-	// );
-	//=====================================================//
-
-	useEffect(() => {
-		const weeks = generateWeeksForMonth(monthNumber, year);
-		//console.log("weeks for", monthNumber, weeks);
-		setWeeks(weeks);
-	}, [monthNumber, year]);
+	useEffect(
+		() => console.log("month recieved in month", monthNumber, month),
+		[month, monthNumber]
+	);
 
 	return (
 		<div className="month" ref={ref}>
@@ -48,13 +38,11 @@ export default function Month({ monthNumber, year }) {
 					</span>
 				))}
 			</div>
-			{weeks.map((week, i) => (
+			{month.map((week, i) => (
 				<Week
 					key={"month-" + monthNumber + "-week-" + i}
 					week={week}
 					weekNumber={i}
-					isFirst={i === 0}
-					isLast={i === weeks.length - 1}
 					divWidth={monthDivWidth}
 				/>
 			))}

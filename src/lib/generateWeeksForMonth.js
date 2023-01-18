@@ -9,6 +9,7 @@ export default function generateWeeksForMonth(monthIndex, year) {
 			dayNumber: currentDay.getDate(),
 			monthIndex: monthIndex,
 			year: year,
+			isSelected: false,
 		});
 		if (currentDay.getDay() === 0) {
 			weeks.push([]);
@@ -18,5 +19,27 @@ export default function generateWeeksForMonth(monthIndex, year) {
 	if (weeks[weeks.length - 1].length === 0) {
 		weeks.pop();
 	}
-	return weeks;
+	// fill not full weeks with empty objects:
+	let updatedWeeks = [];
+	weeks.forEach((week, i) => {
+		if (week.length < 7) {
+			const indexesNumToComplete = 7 - week.length;
+			let updatedWeek = [...week];
+			if (i === 0) {
+				// complete an array from the beggining
+				for (let i = 0; i < indexesNumToComplete; i++) {
+					updatedWeek.unshift({});
+				}
+			} else {
+				// complete an array to the end:
+				for (let i = 0; i < indexesNumToComplete; i++) {
+					updatedWeek = [...updatedWeek, {}];
+				}
+			}
+			updatedWeeks.push(updatedWeek);
+		} else {
+			updatedWeeks.push(week);
+		}
+	});
+	return updatedWeeks;
 }
