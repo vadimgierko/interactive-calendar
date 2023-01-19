@@ -29,11 +29,11 @@ export default function Month({ month, monthNumber, year }) {
 	// );
 
 	return (
-		<div className="month" ref={ref}>
+		<div className="month mb-3" ref={ref}>
 			<h5 className="text-center">{getMonthName(monthNumber, year)}</h5>
-			<div className="d-flex">
+			<div className="d-flex text-center">
 				{["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"].map((day) => (
-					<span key={day} style={{ width: monthDivWidth / 7 }}>
+					<span key={day} style={{ width: "100%" }}>
 						{day}
 					</span>
 				))}
@@ -45,7 +45,6 @@ export default function Month({ month, monthNumber, year }) {
 					weekNumber={i}
 					monthNumber={monthNumber}
 					year={year}
-					divWidth={monthDivWidth}
 				/>
 			))}
 		</div>

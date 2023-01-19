@@ -1,9 +1,9 @@
-export default function Day({ dayNumber, className, divWidth, onClick }) {
+export default function Day({ dayNumber, className, onClick }) {
 	return (
 		<span
 			className={className}
 			style={{
-				width: divWidth / 7,
+				width: "100%",
 				cursor: "pointer",
 			}}
 			onClick={onClick}

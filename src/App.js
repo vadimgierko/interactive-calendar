@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./App.css";
 import Calendar from "./components/Calendar";
-import { Container } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
 import { useCalendar } from "./context.js/useCalendar";
 import generateCalendar from "./lib/generateCalendar";
 
@@ -18,7 +18,7 @@ function App() {
 
 	return (
 		<Container>
-			<header className="text-center">
+			<header className="text-center mt-3 mb-5">
 				<h1>Interactive Calendar {year}</h1>
 			</header>
 			<main>

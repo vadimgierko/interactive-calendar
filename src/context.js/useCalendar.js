@@ -40,7 +40,7 @@ export function CalendarProvider({ children }) {
 		setCalendar(updatedCalendar);
 	}
 
-	useEffect(() => console.log("calendar:", calendar), [calendar]);
+	//useEffect(() => console.log("calendar:", calendar), [calendar]);
 
 	// populate a selected days arr on every calendar change:
 	useEffect(() => {
@@ -56,7 +56,10 @@ export function CalendarProvider({ children }) {
 		setSelectedDays(updatedSelectedDays);
 	}, [calendar]);
 
-	useEffect(() => console.log("selectedDays:", selectedDays), [selectedDays]);
+	useEffect(
+		() => console.log("selected days were updated:", selectedDays),
+		[selectedDays]
+	);
 
 	const value = {
 		calendar,
