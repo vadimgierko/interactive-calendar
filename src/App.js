@@ -4,8 +4,10 @@ import Calendar from "./components/Calendar";
 import Container from "react-bootstrap/Container";
 import { useCalendar } from "./context.js/useCalendar";
 import generateCalendar from "./lib/generateCalendar";
+import Footer from "./layout/Footer";
+import Header from "./layout/Header";
 
-function App() {
+export default function App() {
 	const year = 2023;
 	const { calendar, setCalendar } = useCalendar();
 
@@ -17,15 +19,13 @@ function App() {
 	}, [calendar, setCalendar]);
 
 	return (
-		<Container>
-			<header className="text-center mt-3 mb-5">
-				<h1>Interactive Calendar {year}</h1>
-			</header>
+		<Container className="text-center">
+			<Header year={year} />
 			<main>
 				<Calendar year={year} calendar={calendar} />
 			</main>
+			<hr />
+			<Footer />
 		</Container>
 	);
 }
-
-export default App;
