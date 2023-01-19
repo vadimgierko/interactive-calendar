@@ -43,6 +43,8 @@ export default function Month({ month, monthNumber, year }) {
 					key={"month-" + monthNumber + "-week-" + i}
 					week={week}
 					weekNumber={i}
+					monthNumber={monthNumber}
+					year={year}
 					divWidth={monthDivWidth}
 				/>
 			))}
