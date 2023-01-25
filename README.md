@@ -5,5 +5,6 @@ Interactive calendar written in React that generates a full screen calendar for 
 ## Tech Stack
 
 - React 18.2
+- React Context & useReducer state management
 - React Bootstrap 2.7
 - Bootstrap 5.2.3

@@ -1,26 +1,26 @@
-import { useCalendar } from "../context.js/useCalendar";
+import { useCalendarDispatch } from "../context/CalendarContext";
 import getMonthName from "../lib/getMonthName";
 import Day from "./Day";
 
 export default function Week({ week, weekNumber, monthNumber, year }) {
-	const { selectDay, unselectDay } = useCalendar();
+	const dispatch = useCalendarDispatch();
 
 	function generateDayKey(i) {
 		const dayObj = week[i];
 
 		return Object.keys(dayObj).length
 			? dayObj.year.toString() +
-					"-" +
-					(dayObj.monthIndex + 1).toString() +
-					"-" +
-					dayObj.dayNumber.toString()
+			"-" +
+			(dayObj.monthIndex + 1).toString() +
+			"-" +
+			dayObj.dayNumber.toString()
 			: year.toString() +
-					"-" +
-					(monthNumber + 1).toString() +
-					"-" +
-					weekNumber.toString() +
-					"-" +
-					i.toString();
+			"-" +
+			(monthNumber + 1).toString() +
+			"-" +
+			weekNumber.toString() +
+			"-" +
+			i.toString();
 	}
 
 	function handleClick(i) {
@@ -34,9 +34,15 @@ export default function Week({ week, weekNumber, monthNumber, year }) {
 				day
 			);
 			if (!day.isSelected) {
-				selectDay(day);
+				dispatch({
+					type: "day-selected",
+					day: day
+				})
 			} else {
-				unselectDay(day);
+				dispatch({
+					type: "day-unselected",
+					day: day
+				})
 			}
 		} else {
 			console.log("There is no day here...");
