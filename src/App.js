@@ -8,21 +8,27 @@ import Footer from "./layout/Footer";
 import Header from "./layout/Header";
 
 export default function App() {
-	const year = 2023;
+	const [year, setYear] = useState(2023); // setting year is controlled by <Header />
 	const calendar = useCalendar();
 	const dispatch = useCalendarDispatch();
 
-	const [selectedDays, setSelectedDays] = useState([])
+	// This stored data (selectedDays) can be used according to your needs:
+	// Every day object contains:
+	// - dayIndex (number: 0 = Monday),
+	// - dayNumber,
+	// - isSelected (boolean),
+	// - monthIndex,
+	// - weekIndex (for the particular month),
+	// - year.
+	const [selectedDays, setSelectedDays] = useState([]);
 
 	useEffect(() => {
-		if (!calendar || (calendar && !calendar.length)) {
-			const initCalendar = generateCalendar(year);
-			dispatch({
-				type: "calendar-initiated",
-				initCalendar: initCalendar
-			});
-		}
-	}, [calendar, dispatch]);
+		const initCalendar = generateCalendar(year);
+		dispatch({
+			type: "calendar-initiated",
+			initCalendar: initCalendar,
+		});
+	}, [dispatch, year]);
 
 	// populate a selected days arr on every calendar change:
 	useEffect(() => {
@@ -45,7 +51,7 @@ export default function App() {
 
 	return (
 		<Container className="text-center">
-			<Header year={year} />
+			<Header year={year} setYear={setYear} />
 			<main>
 				<Calendar year={year} calendar={calendar} />
 			</main>

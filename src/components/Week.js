@@ -54,7 +54,13 @@ export default function Week({ week, weekNumber, monthNumber, year }) {
 			{["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"].map((dayName, i) => (
 				<Day
 					key={generateDayKey(i)}
-					className={week[i].isSelected ? "day selected" : "day"}
+					className={
+						week[i].dayNumber
+							? week[i].isSelected
+								? "day selected"
+								: "day"
+							: ""
+					}
 					dayNumber={week[i].dayNumber}
 					onClick={() => handleClick(i)}
 				/>

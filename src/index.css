@@ -5,7 +5,8 @@ body {
 
 .day:hover {
   background-color: rgb(68, 114, 221);
-  color: white
+  color: white;
+  cursor: pointer;
 }
 
 .selected {
